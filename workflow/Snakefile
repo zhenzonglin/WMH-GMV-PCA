@@ -1,0 +1,30 @@
+import json
+import sys
+from pathlib import Path
+
+run_dir = Path(config["run_dir"]).resolve()
+manifest = json.loads(Path(config["manifest"]).read_text())
+settings = json.loads(Path(config["resolved_config"]).read_text())
+tasks = {task["task_id"]: task for task in manifest["tasks"]}
+targets = manifest.get("target_task_ids", list(tasks))
+flag = lambda tid: str(run_dir / "tasks" / tid / "finished.flag")
+
+rule all:
+    input: [flag(tid) for tid in targets]
+
+rule scientific_task:
+    input:
+        lambda wc: [flag(tid) for tid in tasks[wc.task_id]["dependencies"]]
+    output:
+        str(run_dir / "tasks" / "{task_id}" / "finished.flag")
+    threads: settings["runtime"]["execution"]["blas_threads_per_job"]
+    resources:
+        mem_mb=max(1, settings["runtime"]["execution"]["memory_mb"] // settings["runtime"]["execution"]["max_parallel_jobs"]),
+        project_job=1
+    params:
+        python=settings["paths"]["python"],
+        run_dir=str(run_dir)
+    log:
+        str(run_dir / "logs" / "{task_id}.log")
+    shell:
+        "{params.python:q} -m wmh_gmv.worker --run-dir {params.run_dir:q} --task-id {wildcards.task_id:q} > {log:q} 2>&1"

@@ -1,0 +1,1098 @@
+{
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "project",
+    "stages",
+    "paths",
+    "analysis",
+    "variables",
+    "runtime"
+  ],
+  "properties": {
+    "project": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "name",
+        "project_root",
+        "mode",
+        "schema_version"
+      ],
+      "properties": {
+        "name": {
+          "type": "string"
+        },
+        "project_root": {
+          "type": "string"
+        },
+        "mode": {
+          "type": "string",
+          "enum": [
+            "production",
+            "synthetic"
+          ]
+        },
+        "schema_version": {
+          "type": "integer",
+          "minimum": 0
+        }
+      }
+    },
+    "stages": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "representation",
+        "acute_location",
+        "clinical_b1",
+        "clinical_b2",
+        "export_statistician"
+      ],
+      "properties": {
+        "representation": {
+          "type": "boolean"
+        },
+        "acute_location": {
+          "type": "boolean"
+        },
+        "clinical_b1": {
+          "type": "boolean"
+        },
+        "clinical_b2": {
+          "type": "boolean"
+        },
+        "export_statistician": {
+          "type": "boolean"
+        }
+      }
+    },
+    "paths": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "output_root",
+        "state_root",
+        "log_root",
+        "temp_root",
+        "python",
+        "rscript",
+        "r_library",
+        "cohorts",
+        "atlases"
+      ],
+      "properties": {
+        "output_root": {
+          "type": "string"
+        },
+        "state_root": {
+          "type": "string"
+        },
+        "log_root": {
+          "type": "string"
+        },
+        "temp_root": {
+          "type": "string"
+        },
+        "python": {
+          "type": "string"
+        },
+        "rscript": {
+          "type": "string"
+        },
+        "r_library": {
+          "type": "string"
+        },
+        "cohorts": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "LS",
+            "C3",
+            "GB"
+          ],
+          "properties": {
+            "LS": {
+              "type": "object",
+              "additionalProperties": false,
+              "required": [
+                "roster",
+                "derivatives_root",
+                "wmh_table",
+                "gmv_table",
+                "metadata_table",
+                "clinical_table",
+                "raw_records"
+              ],
+              "properties": {
+                "roster": {
+                  "type": "string"
+                },
+                "derivatives_root": {
+                  "type": "string"
+                },
+                "wmh_table": {
+                  "type": [
+                    "string",
+                    "null"
+                  ]
+                },
+                "gmv_table": {
+                  "type": [
+                    "string",
+                    "null"
+                  ]
+                },
+                "metadata_table": {
+                  "type": [
+                    "string",
+                    "null"
+                  ]
+                },
+                "clinical_table": {
+                  "type": [
+                    "string",
+                    "null"
+                  ]
+                },
+                "raw_records": {
+                  "type": [
+                    "string",
+                    "null"
+                  ]
+                }
+              }
+            },
+            "C3": {
+              "type": "object",
+              "additionalProperties": false,
+              "required": [
+                "roster",
+                "derivatives_root",
+                "wmh_table",
+                "gmv_table",
+                "metadata_table",
+                "clinical_table",
+                "raw_records"
+              ],
+              "properties": {
+                "roster": {
+                  "type": "string"
+                },
+                "derivatives_root": {
+                  "type": "string"
+                },
+                "wmh_table": {
+                  "type": [
+                    "string",
+                    "null"
+                  ]
+                },
+                "gmv_table": {
+                  "type": [
+                    "string",
+                    "null"
+                  ]
+                },
+                "metadata_table": {
+                  "type": [
+                    "string",
+                    "null"
+                  ]
+                },
+                "clinical_table": {
+                  "type": [
+                    "string",
+                    "null"
+                  ]
+                },
+                "raw_records": {
+                  "type": [
+                    "string",
+                    "null"
+                  ]
+                }
+              }
+            },
+            "GB": {
+              "type": "object",
+              "additionalProperties": false,
+              "required": [
+                "roster",
+                "derivatives_root",
+                "wmh_table",
+                "gmv_table",
+                "metadata_table",
+                "clinical_table",
+                "raw_records"
+              ],
+              "properties": {
+                "roster": {
+                  "type": "string"
+                },
+                "derivatives_root": {
+                  "type": "string"
+                },
+                "wmh_table": {
+                  "type": [
+                    "string",
+                    "null"
+                  ]
+                },
+                "gmv_table": {
+                  "type": [
+                    "string",
+                    "null"
+                  ]
+                },
+                "metadata_table": {
+                  "type": [
+                    "string",
+                    "null"
+                  ]
+                },
+                "clinical_table": {
+                  "type": [
+                    "string",
+                    "null"
+                  ]
+                },
+                "raw_records": {
+                  "type": [
+                    "string",
+                    "null"
+                  ]
+                }
+              }
+            }
+          }
+        },
+        "atlases": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "name",
+              "kind",
+              "path",
+              "labels",
+              "template",
+              "sha256",
+              "license",
+              "source",
+              "include_labels",
+              "exclude_labels"
+            ],
+            "properties": {
+              "name": {
+                "type": "string"
+              },
+              "kind": {
+                "type": "string"
+              },
+              "path": {
+                "type": "string"
+              },
+              "labels": {
+                "type": "string"
+              },
+              "template": {
+                "type": "string"
+              },
+              "sha256": {
+                "type": [
+                  "string",
+                  "null"
+                ]
+              },
+              "license": {
+                "type": "string"
+              },
+              "source": {
+                "type": "string"
+              },
+              "include_labels": {
+                "type": "array",
+                "items": {}
+              },
+              "exclude_labels": {
+                "type": "array",
+                "items": {
+                  "type": "integer",
+                  "minimum": 0
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "analysis": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "seed",
+        "figures",
+        "age_range",
+        "normative",
+        "pca",
+        "acute",
+        "clinical"
+      ],
+      "properties": {
+        "seed": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "figures": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "width_px",
+            "height_px",
+            "resolution",
+            "max_heatmap_features"
+          ],
+          "properties": {
+            "width_px": {
+              "type": "integer",
+              "minimum": 0
+            },
+            "height_px": {
+              "type": "integer",
+              "minimum": 0
+            },
+            "resolution": {
+              "type": "integer",
+              "minimum": 0
+            },
+            "max_heatmap_features": {
+              "type": "integer",
+              "minimum": 0
+            }
+          }
+        },
+        "age_range": {
+          "type": "array",
+          "items": {
+            "type": "integer",
+            "minimum": 0
+          }
+        },
+        "normative": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "folds",
+            "age_spline_df",
+            "min_positive",
+            "cdf_clip",
+            "max_cycles",
+            "prediction_interval"
+          ],
+          "properties": {
+            "folds": {
+              "type": "integer",
+              "minimum": 0
+            },
+            "age_spline_df": {
+              "type": "integer",
+              "minimum": 0
+            },
+            "min_positive": {
+              "type": "integer",
+              "minimum": 0
+            },
+            "cdf_clip": {
+              "type": "number",
+              "minimum": 0,
+              "exclusiveMinimum": 0,
+              "exclusiveMaximum": 0.5
+            },
+            "max_cycles": {
+              "type": "integer",
+              "minimum": 0
+            },
+            "prediction_interval": {
+              "type": "number",
+              "minimum": 0
+            }
+          }
+        },
+        "pca": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "max_components",
+            "cv_repeats",
+            "mask_fraction",
+            "bootstrap_repeats",
+            "convergence_tolerance",
+            "near_degenerate_ratio",
+            "angle_median_max",
+            "angle_p95_max",
+            "loading_similarity_min",
+            "score_icc_min"
+          ],
+          "properties": {
+            "max_components": {
+              "type": "integer",
+              "minimum": 0
+            },
+            "cv_repeats": {
+              "type": "integer",
+              "minimum": 0
+            },
+            "mask_fraction": {
+              "type": "number",
+              "minimum": 0,
+              "exclusiveMinimum": 0,
+              "exclusiveMaximum": 1
+            },
+            "bootstrap_repeats": {
+              "type": "integer",
+              "minimum": 0
+            },
+            "convergence_tolerance": {
+              "type": "number",
+              "minimum": 0
+            },
+            "near_degenerate_ratio": {
+              "type": "number",
+              "minimum": 0
+            },
+            "angle_median_max": {
+              "type": "integer",
+              "minimum": 0
+            },
+            "angle_p95_max": {
+              "type": "integer",
+              "minimum": 0
+            },
+            "loading_similarity_min": {
+              "type": "number",
+              "minimum": 0
+            },
+            "score_icc_min": {
+              "type": "number",
+              "minimum": 0
+            }
+          }
+        },
+        "acute": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "max_components",
+            "volume_spline_df",
+            "template",
+            "expected_spatial_unit",
+            "probability_scale",
+            "allow_grid_resampling",
+            "minimum_region_affected",
+            "minimum_region_fraction",
+            "binary_tolerance",
+            "grid_affine_tolerance"
+          ],
+          "properties": {
+            "max_components": {
+              "type": "integer",
+              "minimum": 0
+            },
+            "volume_spline_df": {
+              "type": "integer",
+              "minimum": 0
+            },
+            "template": {
+              "type": "string"
+            },
+            "expected_spatial_unit": {
+              "type": "string"
+            },
+            "probability_scale": {
+              "type": "integer",
+              "minimum": 0
+            },
+            "allow_grid_resampling": {
+              "type": "boolean"
+            },
+            "minimum_region_affected": {
+              "type": "integer",
+              "minimum": 0
+            },
+            "minimum_region_fraction": {
+              "type": "number",
+              "minimum": 0
+            },
+            "binary_tolerance": {
+              "type": "number",
+              "minimum": 0
+            },
+            "grid_affine_tolerance": {
+              "type": "number",
+              "minimum": 0
+            }
+          }
+        },
+        "clinical": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "visits",
+            "age_spline_df",
+            "nihss_spline_df",
+            "acute_volume_spline_df",
+            "max_acute_components",
+            "max_chronic_components",
+            "nAGQ",
+            "validation_nAGQ",
+            "alpha",
+            "nominal_alpha",
+            "prediction_epsilon",
+            "exclude_conflicts",
+            "use_nominal_visit_dates_for_death",
+            "min_complete_cases",
+            "minimum_residual_subjects",
+            "gradient_tolerance",
+            "prediction_folds",
+            "calibration_bins",
+            "score_standardization",
+            "continuous_covariate_standardization",
+            "optimizer",
+            "enable_internal_validation",
+            "covariates"
+          ],
+          "properties": {
+            "visits": {
+              "type": "array",
+              "items": {
+                "type": "integer",
+                "minimum": 0
+              }
+            },
+            "age_spline_df": {
+              "type": "integer",
+              "minimum": 0
+            },
+            "nihss_spline_df": {
+              "type": "integer",
+              "minimum": 0
+            },
+            "acute_volume_spline_df": {
+              "type": "integer",
+              "minimum": 0
+            },
+            "max_acute_components": {
+              "type": "integer",
+              "minimum": 0
+            },
+            "max_chronic_components": {
+              "type": "integer",
+              "minimum": 0
+            },
+            "nAGQ": {
+              "type": "integer",
+              "minimum": 0
+            },
+            "validation_nAGQ": {
+              "type": "integer",
+              "minimum": 0
+            },
+            "alpha": {
+              "type": "number",
+              "minimum": 0
+            },
+            "nominal_alpha": {
+              "type": "number",
+              "minimum": 0
+            },
+            "prediction_epsilon": {
+              "type": "number",
+              "minimum": 0
+            },
+            "exclude_conflicts": {
+              "type": "boolean"
+            },
+            "use_nominal_visit_dates_for_death": {
+              "type": "boolean"
+            },
+            "min_complete_cases": {
+              "type": "integer",
+              "minimum": 0
+            },
+            "minimum_residual_subjects": {
+              "type": "integer",
+              "minimum": 0
+            },
+            "gradient_tolerance": {
+              "type": "number",
+              "minimum": 0
+            },
+            "prediction_folds": {
+              "type": "integer",
+              "minimum": 0
+            },
+            "calibration_bins": {
+              "type": "integer",
+              "minimum": 0
+            },
+            "score_standardization": {
+              "type": "string"
+            },
+            "continuous_covariate_standardization": {
+              "type": "string"
+            },
+            "optimizer": {
+              "type": "object",
+              "additionalProperties": false,
+              "required": [
+                "method",
+                "relative_tolerance",
+                "parameter_tolerance",
+                "inner_gradient_tolerance",
+                "outer_gradient_tolerance",
+                "max_iterations",
+                "max_evaluations"
+              ],
+              "properties": {
+                "method": {
+                  "type": "string"
+                },
+                "relative_tolerance": {
+                  "type": "number",
+                  "minimum": 0
+                },
+                "parameter_tolerance": {
+                  "type": "number",
+                  "minimum": 0
+                },
+                "inner_gradient_tolerance": {
+                  "type": "number",
+                  "minimum": 0
+                },
+                "outer_gradient_tolerance": {
+                  "type": "number",
+                  "minimum": 0
+                },
+                "max_iterations": {
+                  "type": "integer",
+                  "minimum": 0
+                },
+                "max_evaluations": {
+                  "type": "integer",
+                  "minimum": 0
+                }
+              }
+            },
+            "enable_internal_validation": {
+              "type": "boolean"
+            },
+            "covariates": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            }
+          }
+        }
+      }
+    },
+    "variables": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "id_column",
+        "metadata",
+        "sex_map",
+        "imaging",
+        "clinical"
+      ],
+      "properties": {
+        "id_column": {
+          "type": "string"
+        },
+        "metadata": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "age",
+            "sex",
+            "icv_ml",
+            "wmh_total_ml",
+            "gmv_total_ml",
+            "lesion_mask",
+            "lesion_template"
+          ],
+          "properties": {
+            "age": {
+              "type": "string"
+            },
+            "sex": {
+              "type": "string"
+            },
+            "icv_ml": {
+              "type": "string"
+            },
+            "wmh_total_ml": {
+              "type": "string"
+            },
+            "gmv_total_ml": {
+              "type": "string"
+            },
+            "lesion_mask": {
+              "type": "string"
+            },
+            "lesion_template": {
+              "type": "string"
+            }
+          }
+        },
+        "sex_map": {
+          "type": "object"
+        },
+        "imaging": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "wmh_prefix",
+            "gmv_prefix",
+            "volume_suffix",
+            "expected_wmh_regions",
+            "expected_gmv_regions",
+            "table_candidates",
+            "feature_json_pattern",
+            "wmh_json_pattern",
+            "corrected_wmh_pattern",
+            "icv_json_key",
+            "native_gm_json_key"
+          ],
+          "properties": {
+            "wmh_prefix": {
+              "type": "string"
+            },
+            "gmv_prefix": {
+              "type": "string"
+            },
+            "volume_suffix": {
+              "type": "string"
+            },
+            "expected_wmh_regions": {
+              "type": "integer",
+              "minimum": 0
+            },
+            "expected_gmv_regions": {
+              "type": "integer",
+              "minimum": 0
+            },
+            "table_candidates": {
+              "type": "object",
+              "additionalProperties": false,
+              "required": [
+                "wmh",
+                "gmv"
+              ],
+              "properties": {
+                "wmh": {
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  }
+                },
+                "gmv": {
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  }
+                }
+              }
+            },
+            "feature_json_pattern": {
+              "type": "string"
+            },
+            "wmh_json_pattern": {
+              "type": "string"
+            },
+            "corrected_wmh_pattern": {
+              "type": "string"
+            },
+            "icv_json_key": {
+              "type": "string"
+            },
+            "native_gm_json_key": {
+              "type": "string"
+            }
+          }
+        },
+        "clinical": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "fields",
+            "value_maps",
+            "source_value_maps",
+            "field_missing_codes",
+            "missing_codes",
+            "events",
+            "medications"
+          ],
+          "properties": {
+            "fields": {
+              "type": "object"
+            },
+            "value_maps": {
+              "type": "object"
+            },
+            "source_value_maps": {
+              "type": "object"
+            },
+            "field_missing_codes": {
+              "type": "object"
+            },
+            "missing_codes": {
+              "type": "array"
+            },
+            "events": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "additionalProperties": false,
+                "required": [
+                  "type",
+                  "date",
+                  "confirmed",
+                  "time_unit",
+                  "time_origin"
+                ],
+                "properties": {
+                  "type": {
+                    "type": "string"
+                  },
+                  "date": {
+                    "type": "string"
+                  },
+                  "confirmed": {
+                    "type": "string"
+                  },
+                  "time_unit": {
+                    "type": "string"
+                  },
+                  "time_origin": {
+                    "type": "string"
+                  }
+                }
+              }
+            },
+            "medications": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "additionalProperties": false,
+                "required": [
+                  "visit_month",
+                  "drug",
+                  "status",
+                  "dose"
+                ],
+                "properties": {
+                  "visit_month": {
+                    "type": "integer",
+                    "minimum": 0
+                  },
+                  "drug": {
+                    "type": "string"
+                  },
+                  "status": {
+                    "type": "string"
+                  },
+                  "dose": {
+                    "type": [
+                      "string",
+                      "null"
+                    ]
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "runtime": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "execution",
+        "monitor",
+        "shutdown",
+        "resume",
+        "environment"
+      ],
+      "properties": {
+        "execution": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "cores",
+            "max_parallel_jobs",
+            "patient_batch_size",
+            "blas_threads_per_job",
+            "memory_mb",
+            "background",
+            "keep_going",
+            "automatic_retries",
+            "retry_failed_on_resume",
+            "startup_timeout_seconds"
+          ],
+          "properties": {
+            "cores": {
+              "type": "integer",
+              "minimum": 1
+            },
+            "max_parallel_jobs": {
+              "type": "integer",
+              "minimum": 1
+            },
+            "patient_batch_size": {
+              "type": "integer",
+              "minimum": 0
+            },
+            "blas_threads_per_job": {
+              "type": "integer",
+              "minimum": 1
+            },
+            "memory_mb": {
+              "type": "integer",
+              "minimum": 1
+            },
+            "background": {
+              "type": "boolean"
+            },
+            "keep_going": {
+              "type": "boolean"
+            },
+            "automatic_retries": {
+              "type": "integer",
+              "minimum": 0
+            },
+            "retry_failed_on_resume": {
+              "type": "boolean"
+            },
+            "startup_timeout_seconds": {
+              "type": "integer",
+              "minimum": 1
+            }
+          }
+        },
+        "monitor": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "refresh_seconds",
+            "heartbeat_seconds",
+            "stale_heartbeat_seconds",
+            "outputs"
+          ],
+          "properties": {
+            "refresh_seconds": {
+              "type": "integer",
+              "minimum": 1
+            },
+            "heartbeat_seconds": {
+              "type": "integer",
+              "minimum": 1
+            },
+            "stale_heartbeat_seconds": {
+              "type": "integer",
+              "minimum": 1
+            },
+            "outputs": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            }
+          }
+        },
+        "shutdown": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "mode",
+            "wait_for_exit_seconds",
+            "drain_timeout_seconds",
+            "force_kill"
+          ],
+          "properties": {
+            "mode": {
+              "type": "string"
+            },
+            "wait_for_exit_seconds": {
+              "type": "integer",
+              "minimum": 0
+            },
+            "drain_timeout_seconds": {
+              "type": [
+                "number",
+                "null"
+              ],
+              "minimum": 0
+            },
+            "force_kill": {
+              "type": "boolean"
+            }
+          }
+        },
+        "resume": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "reuse_verified_outputs",
+            "require_matching_scientific_config"
+          ],
+          "properties": {
+            "reuse_verified_outputs": {
+              "type": "boolean"
+            },
+            "require_matching_scientific_config": {
+              "type": "boolean"
+            }
+          }
+        },
+        "environment": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "cran_repository",
+            "install_jobs",
+            "r_packages",
+            "scheduler_version",
+            "minimum_python"
+          ],
+          "properties": {
+            "cran_repository": {
+              "type": "string"
+            },
+            "install_jobs": {
+              "type": "integer",
+              "minimum": 0
+            },
+            "r_packages": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            },
+            "scheduler_version": {
+              "type": "string"
+            },
+            "minimum_python": {
+              "type": "string"
+            }
+          }
+        }
+      }
+    }
+  },
+  "$schema": "https://json-schema.org/draft/2020-12/schema"
+}

@@ -1,0 +1,44 @@
+version: 1
+# 此文件仅用于资源准备，不启动患者分析；远程有FSL时修改该路径。
+fsl_root: /opt/fsl
+fsl_version_file: etc/fslversion
+expected_fsl_version: 6.0.7.18
+working_cache: tmp/atlas-preparation
+output_manifest: resources/atlases/atlas_manifest.json
+allow_lateralized_download: true
+download_timeout_seconds: 30
+allow_library_split_fallback: true
+overwrite_existing: false
+expected_spatial_unit: mm
+expected_voxel_sizes: [2, 2, 2]
+expected_template: MNI152NLin6Asym
+# 保留已发表图谱的边界定义；侧别核查采用质心及至少95%体素位于对应半球。
+maximum_opposite_hemisphere_fraction: 0.05
+atlases:
+  - target_name: HarvardOxford_cortical_lateralized
+    method: nilearn_lateralized
+    source_image: data/atlases/HarvardOxford/HarvardOxford-cort-maxprob-thr25-2mm.nii.gz
+    source_labels: data/atlases/HarvardOxford-Cortical.xml
+    labels_index_offset: 1
+    expected_shape: [91, 109, 91]
+    public_atlas_name: cortl-maxprob-thr25-2mm
+    fallback_atlas_name: cort-maxprob-thr25-2mm
+    public_source_url: https://www.nitrc.org/frs/download.php/9902/HarvardOxford.tgz
+  - target_name: HarvardOxford_subcortical
+    method: copy
+    source_image: data/atlases/HarvardOxford/HarvardOxford-sub-maxprob-thr25-2mm.nii.gz
+    source_labels: data/atlases/HarvardOxford-Subcortical.xml
+    labels_index_offset: 1
+    expected_shape: [91, 109, 91]
+  - target_name: JHU_tracts20
+    method: copy
+    source_image: data/atlases/JHU/JHU-ICBM-tracts-prob-2mm.nii.gz
+    source_labels: data/atlases/JHU-tracts.xml
+    labels_index_offset: 0
+    expected_shape: [91, 109, 91, 20]
+  - target_name: Diedrichsen_cerebellum
+    method: copy
+    source_image: data/atlases/Cerebellum/Cerebellum-MNIflirt-maxprob-thr25-2mm.nii.gz
+    source_labels: data/atlases/Cerebellum_MNIflirt.xml
+    labels_index_offset: 1
+    expected_shape: [91, 109, 91]

@@ -1,0 +1,17 @@
+# Implementation contract
+
+This project accepts existing corrected WMH20, original GM119, actual ICV and acute masks. It does not reprocess WMH, remove GM lesions, harmonize sites, use MRI-onset delay, or run SuStaIn/brain age/mismatch.
+
+Python package: `src/wmh_gmv`. Main configuration is resolved into one dictionary with keys `project`, `paths`, `analysis`, `variables`, `runtime`. All worker requests are JSON; all machine-readable tables are UTF-8 TSV with explicit string identifiers.
+
+Normalized subject tables use `subject_key`, `participant_id`, `cohort`, `age`, `sex` (0/1), `icv_ml`, `wmh_total_ml`, `gmv_total_ml`. Imaging columns keep their names; an explicit ordered `features` list is passed to R. Source IDs must remain strings. Cohort is LS, C3 or GB.
+
+R entrypoint: `Rscript R/run_stage.R REQUEST.json`. Request fields: `action`, `config` (entire resolved configuration), `inputs` (named absolute file paths), `output_dir` (new task staging directory), and action-specific fields. R functions expose `run_normative(request)`, `run_pca(request)`, `run_clinical(request)`. Each writes `result.json` with `status` (`completed`, `not_estimable`, `waiting_input`), `reason`, `artifacts` (relative filenames), optional `n_subjects` and metrics. Unexpected failure exits nonzero. No status may claim completed without validated artifacts. JSON infinity/NaN are forbidden.
+
+Root owns config/schema, Python ingest/acute/export/report/stage dispatcher, R/run_stage.R, workflow/Snakefile, packaging, fixtures, docs and integration tests. Lifecycle worker owns Python config-consumer lifecycle/state/monitor/worker modules plus scripts/start_project.sh, stop_project.sh, monitor_project.py and lifecycle tests. Imaging worker owns R/common.R, R/normative.R, R/pca.R and corresponding R tests. Clinical worker owns R/clinical.R, Python clinical preparation/audit module and corresponding tests. Do not revert other workers' changes.
+
+Task execution contract: root dispatcher `wmh_gmv.stages.execute_task(task, config, staging_dir)` returns a dict with status/reason/artifacts; task dict carries `task_id`, `stage`, `unit` (`patient`, `region`, `repeat`, `model`, `cohort`), `cohort`, optional `subject_key`, `inputs`, `parameters`, `output_dir`, `dependencies`, and `n_subjects`. Scheduler manifests contain a `tasks` list; each task is the smallest checkpoint. Task output directory is published atomically after success. Lifecycle executor delegates to this function; it does not implement scientific algorithms.
+
+R actions planned: `norm_fit` (inputs.train, feature, modality), `norm_apply` (inputs.data, inputs.model, feature, modality); `pca_cv` (inputs.train, features, modality), `pca_bootstrap` (inputs.train, inputs.reference, features, k, replicate), `pca_fit` (inputs.train, features, selected k), `pca_project` (inputs.data, inputs.model), `joint` (inputs.wmh_scores, inputs.gmv_scores, optional inputs.model), `acute_residualize` (inputs.train, optional inputs.data; features), `clinical_b1` / `clinical_b2` (inputs.data, cohort). R requests may add explicit parameters where necessary; document additions here.
+
+Statistical models must call GAMLSS, FactoMineR, missMDA and ordinal, not replacement custom solvers. Dataset-specific orchestration, normalization, bootstrap matching and exports are transparent project code. Missing packages are failures, never silent algorithm substitutions.

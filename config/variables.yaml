@@ -1,0 +1,88 @@
+id_column: participant_id
+metadata:
+  age: age
+  sex: sex
+  icv_ml: icv_ml
+  wmh_total_ml: wmh_total_ml
+  gmv_total_ml: gmv_total_ml
+  lesion_mask: lesion_mask
+  lesion_template: lesion_template
+sex_map:
+  '0': 0
+  '1': 1
+  F: 0
+  M: 1
+  female: 0
+  male: 1
+imaging:
+  wmh_prefix: wmh_
+  gmv_prefix: muse_
+  volume_suffix: _ml
+  expected_wmh_regions: 20
+  expected_gmv_regions: 119
+  table_candidates:
+    wmh: [tables/wmh20_raw.tsv, tables/wmh20_raw_LS.tsv, wmh20_raw.tsv, wmh20_raw_LS.tsv, substain_features/tables/wmh20_raw_LS.tsv, substain_features/tables/wmh20_raw.tsv]
+    gmv: [tables/t1_gm119_raw.tsv, tables/t1_gm119_raw_LS.tsv, t1_gm119_raw.tsv, t1_gm119_raw_LS.tsv, substain_features/tables/t1_gm119_raw_LS.tsv, substain_features/tables/t1_gm119_raw.tsv]
+  feature_json_pattern: '{participant_id}/t1/t1_features.json'
+  wmh_json_pattern: '{participant_id}/wmh/wmh_features.json'
+  corrected_wmh_pattern: '{participant_id}/wmh/contralateral/wmh_corrected_mask.nii.gz'
+  icv_json_key: dlicv_icv.icv_label702_ml
+  native_gm_json_key: gm119_ml
+clinical:
+  fields:
+    participant_id: [code_n, participant_id]
+    prestroke_mrs: [H_MRS, prestroke_mrs]
+    nihss: [A_NIHSS, nihss]
+    prior_stroke: [prior_stroke, H_STROKE]
+    hypertension: [hypertension, H_HYPT]
+    diabetes: [diabetes, H_DIAB]
+    af: [af, H_AF]
+    ivt: [TPA, ivt]
+    evt: [ET_MT, evt]
+    mrs_m3: [m3_mRS, F3_MRS, mrs_m3]
+    mrs_m6: [m6_mRS, F6_MRS, mrs_m6]
+    mrs_m12: [m12_mRS, F12_MRS, mrs_m12]
+    death_m3: [m3_death, F3_DEATH, death_m3]
+    death_m6: [m6_death, F6_DEATH, death_m6]
+    death_m12: [y1_death, F12_DEATH, death_m12]
+    visit_date_m3: [F3_DATE, visit_date_m3]
+    visit_date_m6: [F6_DATE, visit_date_m6]
+    visit_date_m12: [F12_DATE, visit_date_m12]
+    death_date: [death_date]
+    index_date: [index_date]
+    evt_date: [MT_DT, evt_date]
+    recanalized: [MT_RPT, recanalized]
+    recanalization_date: [MT_RPT_DT, recanalization_date]
+    any_ht: [I_IS_HT, any_ht]
+    symptomatic_ht: [I_IS_SHT, symptomatic_ht]
+    ht_date: [I_IS_SHT_DT, ht_date]
+    cmb: [IMG_SVD_CMB, cmb]
+    css: [IMG_SVD_CMB_cSS, css]
+  value_maps: {}
+  source_value_maps:
+    H_STROKE: {'1': 0, '2': 1}
+    H_HYPT: {'1': 0, '2': 1}
+    H_DIAB: {'1': 0, '2': 1}
+    TPA: {'1': 0, '2': 1}
+    ET_MT: {'1': 0, '2': 1}
+    MT_RPT: {'1': 0, '2': 1}
+    I_IS_HT: {'1': 0, '2': 1}
+    I_IS_SHT: {'1': 0, '2': 1}
+    F3_DEATH: {'1': 1, '2': 0}
+    F6_DEATH: {'1': 1, '2': 0}
+    F12_DEATH: {'1': 1, '2': 0}
+    IMG_SVD_CMB: {'1': 1, '2': 0}
+    IMG_SVD_CMB_cSS: {'1': 0, '2': 1}
+  field_missing_codes: {}
+  missing_codes: ['', NA, NaN, null, -9, -99, 98, 99, 999]
+  events:
+    - {type: ischemic_recurrence, date: y1_is_dd, confirmed: y1_is, time_unit: days, time_origin: index_stroke}
+    - {type: hemorrhagic_stroke, date: y1_HS_dd, confirmed: y1_HS, time_unit: days, time_origin: index_stroke}
+    - {type: symptomatic_ht, date: I_IS_SHT_DT, confirmed: I_IS_SHT, time_unit: calendar, time_origin: calendar}
+  medications:
+    - {visit_month: 3, drug: antiplatelet, status: F3_AP, dose: null}
+    - {visit_month: 6, drug: antiplatelet, status: F6_AP, dose: null}
+    - {visit_month: 12, drug: antiplatelet, status: F12_AP, dose: null}
+    - {visit_month: 3, drug: anticoagulant, status: F3_AC, dose: null}
+    - {visit_month: 6, drug: anticoagulant, status: F6_AC, dose: null}
+    - {visit_month: 12, drug: anticoagulant, status: F12_AC, dose: null}

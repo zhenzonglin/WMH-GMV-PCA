@@ -1,0 +1,74 @@
+# Git可移植默认值；请在私有配置中设置真实输入路径，然后运行audit。
+output_root: runs
+state_root: state
+log_root: logs
+temp_root: tmp
+python: .venv/bin/python
+rscript: /usr/bin/Rscript
+r_library: .Rlib
+cohorts:
+  LS:
+    roster: data/LS/participants.tsv
+    derivatives_root: data/LS/derivatives
+    wmh_table: null
+    gmv_table: null
+    metadata_table: null
+    clinical_table: null
+    raw_records: null
+  C3:
+    roster: data/C3/participants.tsv
+    derivatives_root: data/C3/derivatives
+    wmh_table: null
+    gmv_table: null
+    metadata_table: null
+    clinical_table: null
+    raw_records: null
+  GB:
+    roster: data/GB/participants.tsv
+    derivatives_root: data/GB/derivatives
+    wmh_table: null
+    gmv_table: null
+    metadata_table: null
+    clinical_table: null
+    raw_records: null
+atlases:
+  - name: HarvardOxford_cortical_lateralized
+    kind: labels
+    path: resources/atlases/HarvardOxford-cortl-maxprob-thr25-2mm.nii.gz
+    labels: resources/atlases/HarvardOxford-cortical.tsv
+    template: MNI152NLin6Asym
+    sha256: 26d8462347ec96a63bff47d17e880fa27ecc79c76c8e525c317a3c860418c202
+    license: CC-BY-SA-4.0
+    source: https://fsl.fmrib.ox.ac.uk/fsl/docs/other/datasets.html
+    include_labels: []
+    exclude_labels: [0]
+  - name: HarvardOxford_subcortical
+    kind: labels
+    path: resources/atlases/HarvardOxford-sub-maxprob-thr25-2mm.nii.gz
+    labels: resources/atlases/HarvardOxford-subcortical.tsv
+    template: MNI152NLin6Asym
+    sha256: 72140df8117250d915b753ca2937e078c917525d206e6185e2c1b4ab703fbfcc
+    license: CC-BY-SA-4.0
+    source: https://fsl.fmrib.ox.ac.uk/fsl/docs/other/datasets.html
+    include_labels: []
+    exclude_labels: [0, 1, 2, 3, 12, 13, 14]
+  - name: JHU_tracts20
+    kind: probability
+    path: resources/atlases/JHU-ICBM-tracts-prob-2mm.nii.gz
+    labels: resources/atlases/JHU-tracts.tsv
+    template: MNI152NLin6Asym
+    sha256: a8c3063896fa40902534ce95c2031244a8bffa2ad73f9c586585f4affefbb8f4
+    license: FSL-non-commercial
+    source: https://fsl.fmrib.ox.ac.uk/fsl/docs/other/datasets.html
+    include_labels: []
+    exclude_labels: []
+  - name: Diedrichsen_cerebellum
+    kind: labels
+    path: resources/atlases/Cerebellum-MNIflirt-maxprob-thr25-2mm.nii.gz
+    labels: resources/atlases/Cerebellum.tsv
+    template: MNI152NLin6Asym
+    sha256: 213b19307413314442c7f8e71160f22e4fe0da64f047bbbfa0338bd9c5f77347
+    license: CC-BY-SA-4.0
+    source: https://fsl.fmrib.ox.ac.uk/fsl/docs/other/datasets.html
+    include_labels: []
+    exclude_labels: [0]

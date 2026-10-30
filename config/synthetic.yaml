@@ -1,0 +1,27 @@
+# 仅用于软件验证，不代表真实患者；全部生成参数在此设置。
+project_root: ..
+scenario: degenerate_v1
+seed: 20261030
+output_dir: data/synthetic
+config_dir: config/local/smoke
+overwrite: false
+cohort_sizes: {LS: 180, C3: 500, GB: 250}
+wmh_regions: 3
+gmv_regions: 6
+gmv_global_sd: 0.0
+gmv_spatial_amplitude: 0.055
+gmv_regional_noise_sd: 0.018
+patient_random_intercept_sd: 0.5
+age_range: [50, 75]
+atlas_shape: [8, 8, 8]
+voxel_size_mm: 2
+normative_folds: 2
+normative_min_positive: 10
+pca_max_components: 2
+pca_cv_repeats: 2
+pca_bootstrap_repeats: 3
+cores: 4
+parallel_jobs: 4
+memory_mb: 8192
+enable_clinical: true
+enable_internal_validation: false

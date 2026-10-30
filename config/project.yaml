@@ -1,0 +1,16 @@
+project:
+  name: WMH-GMV-PCA
+  project_root: ..
+  mode: production
+  schema_version: 1
+includes:
+  paths: paths.yaml
+  analysis: analysis.yaml
+  variables: variables.yaml
+  runtime: runtime.yaml
+stages:
+  representation: true
+  acute_location: true
+  clinical_b1: true
+  clinical_b2: true
+  export_statistician: true

@@ -1,0 +1,10 @@
+{
+  "run_id": "20261029T182831Z_ad7a37de",
+  "mode": "synthetic",
+  "task_count": 205,
+  "status_counts": {
+    "completed": 203,
+    "not_estimable": 2
+  },
+  "scientific_hash": "5c16ab1eafdd5e04706b4134ca094a6818875f2e7af22117e848bbe5ec447254"
+}

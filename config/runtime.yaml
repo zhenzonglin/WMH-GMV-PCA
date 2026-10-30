@@ -1,0 +1,30 @@
+execution:
+  cores: 8
+  max_parallel_jobs: 4
+  patient_batch_size: 64
+  blas_threads_per_job: 1
+  memory_mb: 16384
+  background: true
+  keep_going: true
+  automatic_retries: 0
+  retry_failed_on_resume: false
+  startup_timeout_seconds: 30
+monitor:
+  refresh_seconds: 10
+  heartbeat_seconds: 15
+  stale_heartbeat_seconds: 120
+  outputs: [terminal, json, tsv, html]
+shutdown:
+  mode: drain
+  wait_for_exit_seconds: 30
+  drain_timeout_seconds: null
+  force_kill: false
+resume:
+  reuse_verified_outputs: true
+  require_matching_scientific_config: true
+environment:
+  cran_repository: https://cloud.r-project.org
+  install_jobs: 2
+  r_packages: [jsonlite, gamlss, gamlss.dist, FactoMineR, missMDA, ordinal, clue, renv]
+  scheduler_version: 9.27.1
+  minimum_python: '3.11'
